@@ -25,31 +25,5 @@ public class UserStepDefinitions implements BaseTest {
 			msg = msg.split("\n")[0].trim();
 		Assert.assertEquals("You logged into a secure area!", msg);
 	}
-	@After
-	public void after() throws Throwable{
-		File reportOutputDirectory = new File("target");
-		List<String> jsonFiles = new ArrayList<>();
-		jsonFiles.add("cucumber.json");
-		//jsonFiles.add("cucumber-report-2.json");
-
-		String buildNumber = "1";
-		String projectName = "cucumberProject";
-		boolean runWithJenkins = false;
-		boolean parallelTesting = false;
-
-		Configuration configuration = new Configuration(reportOutputDirectory, projectName);
-		// optional configuration
-		configuration.setParallelTesting(parallelTesting);
-		configuration.setRunWithJenkins(runWithJenkins);
-		configuration.setBuildNumber(buildNumber);
-		// addidtional metadata presented on main page
-		configuration.addClassifications("Platform", "Windows");
-		configuration.addClassifications("Browser", "Firefox");
-		configuration.addClassifications("Branch", "release/1.0");
-
-		ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
-		Reportable result = reportBuilder.generateReports();
-		// and here validate 'result' to decide what to do
-		// if report has failed features, undefined steps etc
-	}
+	
 }
